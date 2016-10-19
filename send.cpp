@@ -15,6 +15,13 @@ int main(int argc, char *argv[]) {
      for pin mapping of the raspberry pi GPIO connector
      */
     int PIN = 0;
+    if (argc < 4){
+        fprintf(stderr,"Please provide three mandatory arguments:\n");
+        fprintf(stderr,"SystemCode: The System Code set for all sockets");
+        fprintf(stderr,"UnitCode: The Unit Code for the individual socket");
+        fprintf(stderr,"Command: The Command to send, where 1 means ON and 0 means OFF.");
+        return 1;
+    }
     char* systemCode = argv[1];
     int unitCode = atoi(argv[2]);
     int command  = atoi(argv[3]);
