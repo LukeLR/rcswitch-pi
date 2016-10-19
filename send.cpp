@@ -17,9 +17,9 @@ int main(int argc, char *argv[]) {
     int PIN = 0;
     if (argc < 4){
         fprintf(stderr,"Please provide three mandatory arguments:\n");
-        fprintf(stderr,"SystemCode: The System Code set for all sockets");
-        fprintf(stderr,"UnitCode: The Unit Code for the individual socket");
-        fprintf(stderr,"Command: The Command to send, where 1 means ON and 0 means OFF.");
+        fprintf(stderr,"SystemCode: The System Code set for all sockets\n");
+        fprintf(stderr,"UnitCode: The Unit Code for the individual socket\n");
+        fprintf(stderr,"Command: The Command to send, where 1 means ON and 0 means OFF\n)";
         return 1;
     }
     char* systemCode = argv[1];
