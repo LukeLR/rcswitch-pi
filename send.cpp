@@ -22,7 +22,7 @@ int main(int argc, char *argv[]) {
      * Wheter to use binary mode or not.
      * See bottom of file for an explaination of binary mode.
      */
-    short binaryMode = 0;
+    short binary_mode = 0;
 
     char c; //Temporary character for getopt();
 
@@ -32,9 +32,9 @@ int main(int argc, char *argv[]) {
      *  -b: enable binary mode
      *  -?: show help
      */
-    while ((c = getopt(argc, argv, "bh")) == -1){
+    while ((c = getopt(argc, argv, "bh")) != -1){
       switch(c){
-      case 'b': puts("Enabling binary mode..."); binaryMode = 1; break;
+      case 'b': puts("Enabling binary mode..."); binary_mode = 1; break;
       case 'h': print_help(); return 0;
       }
     }
@@ -57,6 +57,7 @@ int main(int argc, char *argv[]) {
 	printf("sending systemCode[%s] unitCode[%i] command[%i]\n", systemCode, unitCode, command);
 	RCSwitch mySwitch = RCSwitch();
 	mySwitch.enableTransmit(PIN);
+        if (binary_mode) mySwitch.setBinaryMode(1);
     
     switch(command) {
         case 1:
