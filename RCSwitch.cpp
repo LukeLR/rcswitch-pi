@@ -92,7 +92,14 @@ void RCSwitch::setRepeatTransmit(int nRepeatTransmit) {
 void RCSwitch::setReceiveTolerance(int nPercent) {
   RCSwitch::nReceiveTolerance = nPercent;
 }
-  
+
+/**
+ * Enables binary mode for type A-Sockets (10-DIP-Switches)
+ * See explaination for binary mode at the bottom of this file.
+ */
+void RCSwitch::setBinaryMode(bool binaryMode) {
+  RCSwitch::binaryMode = binaryMode;
+}
 
 /**
  * Enable transmissions
@@ -583,3 +590,39 @@ char* RCSwitch::dec2binWzerofill(unsigned long Dec, unsigned int bitLength){
   return bin;
 }
 
+/**
+ * ***********************************
+ * **** EXPLAINATION: Binary mode ****
+ * ***********************************
+ * Traditionally, sockets of type A are adressed by switching one of the 5 DIP-switches
+ * used for the unit code to 1 and setting the rest to 0 (see "old representation" in
+ * table below). This limits the maximum number of units in a system to 5, although
+ * full five bit adresses are used. The other 27 possible adresses are discarded.
+ *
+ * Binary mode adresses this issue and offers full 5-bit adress space for units.
+ * Therefore, units are now adressed as regular binary numbers, which offers a
+ * maximum of 32 units per system:
+ *
+ * |no. | old representation | new binary adress |
+ * |---------------------------------------------|
+ * |   0|               n.a. |             00000 |
+ * |   1|              10000 |             00001 |
+ * |   2|              01000 |             00010 |
+ * |   3|              00100 |             00011 |
+ * |   4|              00010 |             00100 |
+ * |   5|              00001 |             00101 |
+ * |   6|               n.a. |             00110 |
+ * | ...|               ...  |              ...  |
+ * |   8|               n.a. |             01000 |
+ * | ...|               ...  |              ...  |
+ * |  16|               n.a. |             10000 |
+ * | ...|               ...  |              ...  |
+ * |  31|               n.a. |             11111 |
+ * |---------------------------------------------|
+ *
+ * It is, of, necessary, to set all the sockets used to the new binary numbering system.
+ * This might render the regular remotes provided with these socket systems useless,
+ * as they usually only provide 5 buttons to adress one socket each. My remotes allow
+ * usage of the new binary system by pressing multiple buttons at the same time, but
+ * of course I don't know about other remotes than mine. Usually, they should work.
+ */

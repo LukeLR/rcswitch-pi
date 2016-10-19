@@ -88,6 +88,7 @@ class RCSwitch {
     void setReceiveTolerance(int nPercent);
     void setProtocol(int nProtocol);
     void setProtocol(int nProtocol, int nPulseLength);
+    void setBinaryMode(bool binaryMode);
   
   private:
     char* getCodeWordB(int nGroupNumber, int nSwitchNumber, boolean bStatus);
