@@ -1,12 +1,14 @@
 /*
-  RCSwitch - Arduino libary for remote control outlet switches
+  RCSwitch-Pi - Port of the Arduino libary for remote control outlet
+  switches on Raspberry Pi.
   Copyright (c) 2011 Suat Özgür.  All right reserved.
 
   Contributors:
   - Andre Koehler / info(at)tomate-online(dot)de
   - Gordeev Andrey Vladimirovich / gordeev(at)openpyro(dot)com
   
-  Project home: http://code.google.com/p/rc-switch/
+  Project Home: https://github.com/r10r/rcswitch-pi
+  RCSwitch Project home: https://github.com/sui77/rc-switch
 
   This library is free software; you can redistribute it and/or
   modify it under the terms of the GNU Lesser General Public
@@ -109,6 +111,7 @@ class RCSwitch {
     int nPulseLength;
     int nRepeatTransmit;
     char nProtocol;
+    bool binaryMode; //Binary adressing of 10-DIP-Sockets
 
     static int nReceiveTolerance;
     static unsigned long nReceivedValue;

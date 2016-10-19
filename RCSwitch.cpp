@@ -1,5 +1,6 @@
 /*
-  RCSwitch - Arduino libary for remote control outlet switches
+  RCSwitch-Pi - Port of the Arduino libary for remote control outlet
+  switches on Raspberry Pi.
   Copyright (c) 2011 Suat Özgür.  All right reserved.
   
   Contributors:
@@ -7,7 +8,8 @@
   - Gordeev Andrey Vladimirovich / gordeev(at)openpyro(dot)com
   - Skineffect / http://forum.ardumote.com/viewtopic.php?f=2&t=48
   
-  Project home: http://code.google.com/p/rc-switch/
+  Project Home: https://github.com/r10r/rcswitch-pi
+  RCSwitch Project home: https://github.com/sui77/rc-switch
 
   This library is free software; you can redistribute it and/or
   modify it under the terms of the GNU Lesser General Public
