@@ -28,6 +28,8 @@
 
 #include "RCSwitch.h"
 
+#include<iostream>
+
 unsigned long RCSwitch::nReceivedValue = NULL;
 unsigned int RCSwitch::nReceivedBitlength = 0;
 unsigned int RCSwitch::nReceivedDelay = 0;
@@ -43,6 +45,7 @@ RCSwitch::RCSwitch() {
   this->setRepeatTransmit(10);
   this->setReceiveTolerance(60);
   this->setProtocol(1);
+  this->setBinaryMode(0);
 }
 
 /**
@@ -291,6 +294,7 @@ char* RCSwitch::getCodeWordA(char* sGroup, int nChannelCode, boolean bStatus) {
  */
 
 char* RCSwitch::getCodeWordD(char* sGroup, int nChannelCode, boolean bStatus) {
+   std::cout << "Generating binary code word...";
    int nReturnPos = 0;
    static char sReturn[13];
 
