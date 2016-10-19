@@ -167,7 +167,16 @@ void RCSwitch::switchOff(int nAddressCode, int nChannelCode) {
  * @param nChannelCode  Number of the switch itself (1..4)
  */
 void RCSwitch::switchOn(char* sGroup, int nChannel) {
-  this->sendTriState( this->getCodeWordA(sGroup, nChannel, true) );
+  /**
+   * In case binary mode is used, we need to generete a binary codeword. This is done by using
+   * getCodeWordD instead of getCodeWordA. See explaination for binary mode below (at the
+   * bottom of code).
+   */
+  if (binaryMode){
+    this->sendTriState( this->getCodeWordD(sGroup, nChannel, true) );
+  } else {
+    this->sendTriState( this->getCodeWordA(sGroup, nChannel, true) );
+  }
 }
 
 /**
@@ -177,7 +186,16 @@ void RCSwitch::switchOn(char* sGroup, int nChannel) {
  * @param nChannelCode  Number of the switch itself (1..4)
  */
 void RCSwitch::switchOff(char* sGroup, int nChannel) {
-  this->sendTriState( this->getCodeWordA(sGroup, nChannel, false) );
+  /**
+   * In case binary mode is used, we need to generete a binary codeword. This is done by using
+   * getCodeWordD instead of getCodeWordA. See explaination for binary mode below (at the
+   * bottom of code).
+   */
+  if (binaryMode){
+    this->sendTriState( this->getCodeWordD(sGroup, nChannel, false) );
+  } else {
+    this->sendTriState( this->getCodeWordA(sGroup, nChannel, false) );
+  }
 }
 
 /**
