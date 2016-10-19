@@ -94,6 +94,7 @@ class RCSwitch {
     char* getCodeWordB(int nGroupNumber, int nSwitchNumber, boolean bStatus);
     char* getCodeWordA(char* sGroup, int nSwitchNumber, boolean bStatus);
     char* getCodeWordC(char sFamily, int nGroup, int nDevice, boolean bStatus);
+    char* getCodeWordD(char* sGroup, int nSwitchNumber, boolean bStatus);
     void sendT0();
     void sendT1();
     void sendTF();

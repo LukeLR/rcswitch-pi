@@ -268,6 +268,72 @@ char* RCSwitch::getCodeWordA(char* sGroup, int nChannelCode, boolean bStatus) {
 }
 
 /**
+ * Like getCodeWord (Type A)
+ * Type D means: Binary mode (see Binary mode explaination at the end of file)
+ */
+
+char* RCSwitch::getCodeWordD(char* sGroup, int nChannelCode, boolean bStatus) {
+   int nReturnPos = 0;
+   static char sReturn[13];
+
+  /**
+   * The codeword, that needs to be sent, consists of three main parts:
+   * char 0 to 4: Group-Number (already binary)
+   * char 5 to 9: Socket Number (converted to binary, former: the socket number 0-5 sets the only active bit in the return string)
+   *              e.g: socket 1 means: bit 1 is on, others off: 10000
+   *                   socket 5 means: bit 4 is on, others off: 00010
+   *              now: real binary representation of decimal socket number
+   * char 10 to 11: Power state, where on means '01' and off means '10'
+  */
+
+  //const char* code[6] = { "FFFFF", "0FFFF", "F0FFF", "FF0FF", "FFF0F", "FFFF0" }; //former conversion of socket number to binary
+
+  if (nChannelCode < 1 || nChannelCode > 31) {
+      return '\0';
+  }
+
+  // Conversion of System Code
+  for (int i = 0; i<5; i++) {
+    if (sGroup[i] == '0') {
+      sReturn[nReturnPos++] = 'F';
+    } else if (sGroup[i] == '1') {
+      sReturn[nReturnPos++] = '0';
+    } else {
+      return '\0';
+    }
+  }
+
+  /**
+   * Conversion of Unit code: Decimal to Binary
+   *
+   * To convert a decimal d to binary:
+   *  d div 2 = d1; d mod 2 = b0
+   * d1 div 2 = d2; d1 mod 2 = b1;
+   * d2 div 2 = d3; d2 mod 2 = b2;
+   * ...
+   * until dn = 0
+   */
+  int d = nChannelCode; //Current decimal to convert to binary
+  int index = 12; //Which "digit" in return array to write
+  while (d > 0 && index > 4){
+    /**
+     * Although the range of possible integer values for nChannelCode was already
+     * limited to 31 above, and therefore never more than 5 iterations are needed
+     * to convert nChannelCode to binary, I'll just make sure that index gets
+     * never below 4, since it would overwrite the SystemCode then.
+     */
+    switch(d % 2){
+    case 0: sReturn[index] = '0'; break;
+    case 1: sReturn[index] = '1'; break;
+    }
+    d = d / 2;
+    index--;
+  }
+
+  return sReturn;
+}
+
+/**
  * Like getCodeWord (Type C = Intertechno)
  */
 char* RCSwitch::getCodeWordC(char sFamily, int nGroup, int nDevice, boolean bStatus) {
