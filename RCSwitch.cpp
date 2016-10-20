@@ -294,7 +294,6 @@ char* RCSwitch::getCodeWordA(char* sGroup, int nChannelCode, boolean bStatus) {
  */
 
 char* RCSwitch::getCodeWordD(char* sGroup, int nChannelCode, boolean bStatus) {
-   std::cout << "Generating binary code word...";
    int nReturnPos = 0;
    static char sReturn[13];
 

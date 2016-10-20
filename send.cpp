@@ -10,7 +10,7 @@
 #include <unistd.h> //getopt-method for command line flags parsing
 
 int main(int argc, char *argv[]) {
-    
+
     /*
      output PIN is hardcoded for testing purposes
      see https://projects.drogon.net/raspberry-pi/wiringpi/pins/
@@ -24,7 +24,7 @@ int main(int argc, char *argv[]) {
      */
     short binary_mode = 0;
 
-    char c; //Temporary character for getopt();
+    int c; //Temporary character for getopt();
 
     /**
      * Read command line flags.
@@ -32,10 +32,10 @@ int main(int argc, char *argv[]) {
      *  -b: enable binary mode
      *  -?: show help
      */
-    while ((c = getopt(argc, argv, "bh")) != -1){
+    while ((c = getopt(argc, argv, "b?")) != -1){
       switch(c){
       case 'b': puts("Enabling binary mode..."); binary_mode = 1; break;
-      case 'h': print_help(); return 0;
+      case '?': print_help(); return 0;
       }
     }
 
